@@ -45,7 +45,7 @@
             <div class="logo">
                 <img src="images/logo-gr-digital.png" alt="Logo GR Digital">
             </div>
-            <a href="#pricing" class="cta-button header-cta">VER OFERTA DE FINAL DE ANO</a>
+            <a href="#pricing" class="cta-button header-cta">VER PROMOÇÃO ESPECIAL</a>
         </div>
     </header>
 
@@ -162,7 +162,7 @@
         <section id="pricing" class="pricing-section">
             <div class="container text-center">
                 <h2 class="section-title">Escolha o plano ideal para decolar</h2>
-                <p class="section-subtitle">Aproveite nossa oferta especial de final de ano no Plano Vitrine.</p>
+                <p class="section-subtitle">Aproveite nossa Promoção Especial no Plano Vitrine.</p>
 
                 <div class="pricing-grid three-col">
                     
@@ -190,15 +190,15 @@
                     <!-- Plano 2: Plano Vitrine (Oferta) -->
                     <div class="pricing-card highlighted">
                          <div class="highlight-tag">
-                            <span class="star">★</span> OFERTA FINAL DE ANO
+                            <span class="star">★</span> PROMOÇÃO ESPECIAL
                         </div>
                         <h3>Plano Vitrine</h3>
                         
                         <div class="price-container">
                             <p class="old-price">De R$ 800,00</p>
-                            <p class="price">R$ 397,90</p>
+                            <p class="price">R$ 492,00</p>
                             <div class="price-details">
-                                <p>ou até 2x de R$218,13</p>
+                                <p>ou até 2x de R$246,00</p>
                                 <p>+ anuidade de R$120 (1º ano incluso)</p>
                              </div>
                         </div>
@@ -210,7 +210,7 @@
                             <li>✓ Identidade Visual Aplicada</li>
                             <li>✓ Suporte Dedicado</li>
                         </ul>
-                        <a href="https://wa.me/556599493855?text=Olá!%20Quero%20aproveitar%20a%20Oferta%20de%20Fim%20de%20Ano%20do%20Plano%20Vitrine." class="cta-button pulse-button" target="_blank">GARANTIR OFERTA</a>
+                        <a href="https://wa.me/556599493855?text=Olá!%20Quero%20aproveitar%20a%20Promoção%20Especial%20do%20Plano%20Vitrine." class="cta-button pulse-button" target="_blank">GARANTIR OFERTA</a>
                     </div>
 
                     <!-- Plano 3: Personalizado -->
@@ -273,7 +273,7 @@
     <div class="sticky-offer-bar">
         <div class="container sticky-content">
             <div class="sticky-text">
-                <span>Oferta especial termina em:</span>
+                <span>Promoção Especial termina em:</span>
                 <div id="countdown" class="sticky-countdown">
                     <span id="days">00</span>d 
                     <span id="hours">00</span>h 
@@ -281,15 +281,22 @@
                     <span id="seconds">00</span>s
                 </div>
             </div>
-            <a href="https://wa.me/556599493855?text=Olá!%20Quero%20garantir%20o%20Plano%20Vitrine%20com%20a%20Oferta%20de%20Fim%20de%20Ano!" class="sticky-btn pulse-button" target="_blank">APROVEITAR OFERTA</a>
+            <a href="https://wa.me/556599493855?text=Olá!%20Quero%20garantir%20o%20Plano%20Vitrine%20com%20a%20Promoção%20Especial!" class="sticky-btn pulse-button" target="_blank">APROVEITAR OFERTA</a>
         </div>
     </div>
 
     <!-- Script do Cronômetro -->
     <script>
-        // Sincronizado para 20 de Dezembro do ano atual
-        const currentYear = new Date().getFullYear();
-        const countDownDate = new Date(`Dec 20, ${currentYear} 23:59:59`).getTime();
+        // Cronômetro persistente de 15 minutos
+        const duration = 15 * 60 * 1000;
+        let countDownDate = localStorage.getItem('promo_countdown_end');
+
+        if (!countDownDate) {
+            countDownDate = new Date().getTime() + duration;
+            localStorage.setItem('promo_countdown_end', countDownDate);
+        } else {
+            countDownDate = parseInt(countDownDate, 10);
+        }
 
         const countdownFunction = setInterval(function() {
             const now = new Date().getTime();
@@ -303,7 +310,7 @@
 
             // Exibe nos elementos
             const elDays = document.getElementById("days");
-            if(elDays) {
+            if(elDays && distance >= 0) {
                 elDays.innerHTML = days < 10 ? "0" + days : days;
                 document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
                 document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
@@ -313,7 +320,10 @@
             // Se o tempo acabar
             if (distance < 0) {
                 clearInterval(countdownFunction);
-                document.getElementById("countdown").innerHTML = "ENCERRADO";
+                const elCountdown = document.getElementById("countdown");
+                if (elCountdown) {
+                    elCountdown.innerHTML = "ENCERRADO";
+                }
             }
         }, 1000);
     </script>
